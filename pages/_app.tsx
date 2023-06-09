@@ -21,7 +21,7 @@ export default function App(props: AppProps) {
   return (
     <>
       <Head>
-        <title>Matrix</title>
+        <title>HikkaHost</title>
         <link rel="shortcut icon" href="/logo.png" />
         <meta
           name="viewport"
