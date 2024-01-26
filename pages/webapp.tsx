@@ -51,11 +51,11 @@ const WebApp = () => {
                         </Center>
 
                         <Center>
-                            <Group justify="space-between" mt="xs">
-                                <Text fz="sm" c="dimmed">
+                            <Group mt="xs">
+                                <Text>
                                     Subscribe:
                                 </Text>
-                                <Text fz="sm" c="dimmed">
+                                <Text>
                                     23.04.2024
                                 </Text>
 
@@ -86,11 +86,11 @@ const WebApp = () => {
                         </Center>
 
                         <Center>
-                            <Group justify="space-between" mt="xs">
-                                <Text fz="sm" c="dimmed">
+                            <Group mt="xs">
+                                <Text>
                                     Subscribe:
                                 </Text>
-                                <Text fz="sm" c="dimmed">
+                                <Text>
                                     23.04.2024
                                 </Text>
 
