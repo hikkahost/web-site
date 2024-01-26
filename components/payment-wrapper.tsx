@@ -1,5 +1,5 @@
 import { createStyles, Text, Title, List, ThemeIcon } from '@mantine/core';
-import { IconArrowRight } from '@tabler/icons';
+import { IconArrowRight } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -19,7 +19,7 @@ const useStyles = createStyles((theme) => ({
   image: {
     maxWidth: '55%',
     //position: 'relative',
-    
+
     float: 'right',
     marginLeft: 'auto',
     order: 2,
@@ -76,23 +76,23 @@ export function PaymentWrapper() {
       <div className={classes.body}>
         <Title className={classes.title}>Популярные способы <br />оплаты</Title>
         <Text size="lg" color="dimmed">
-            Выберите удобный способ оплаты<br />и получите готовый товар
+          Выберите удобный способ оплаты<br />и получите готовый товар
         </Text>
         <br />
-        
+
         <List
-            spacing="xs"
-            size="sm"
-            center
-            icon={
-                <ThemeIcon color="blue" size={24} radius="xl">
-                  <IconArrowRight size={16} />
-                </ThemeIcon>
-            }
+          spacing="xs"
+          size="sm"
+          center
+          icon={
+            <ThemeIcon color="blue" size={24} radius="xl">
+              <IconArrowRight size={16} />
+            </ThemeIcon>
+          }
         >
-            <List.Item>Apple Pay и Google Pay</List.Item>
-            <List.Item>Банковские карты</List.Item>
-            <List.Item>Электронные кошельки</List.Item>
+          <List.Item>Apple Pay и Google Pay</List.Item>
+          <List.Item>Банковские карты</List.Item>
+          <List.Item>Электронные кошельки</List.Item>
         </List>
       </div>
       <img src='./payment.png' className={classes.image} />

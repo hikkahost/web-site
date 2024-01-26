@@ -1,5 +1,5 @@
 import { createStyles, Text, Title, List, ThemeIcon } from '@mantine/core';
-import { IconLoader3, IconCircleDashed } from '@tabler/icons';
+import { IconCircleDashed } from '@tabler/icons-react';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -8,9 +8,8 @@ const useStyles = createStyles((theme) => ({
     //padding: theme.spacing.xl * 2,
     borderRadius: theme.radius.md,
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.white,
-    border: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[3]
-    }`,
+    border: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[8] : theme.colors.gray[3]
+      }`,
 
     [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       flexDirection: 'column-reverse',
@@ -86,21 +85,21 @@ export function HowWrapper() {
           Как мы работаем?
         </Text>
         <Title className={classes.title}>Слаженно и активно!</Title>
-        
+
         <List
-            spacing="xs"
-            size="sm"
-            center
-            icon={
-                <ThemeIcon color="gray" size={24} radius="xl">
-                  <IconCircleDashed size={16} />
-                </ThemeIcon>
-            }
+          spacing="xs"
+          size="sm"
+          center
+          icon={
+            <ThemeIcon color="gray" size={24} radius="xl">
+              <IconCircleDashed size={16} />
+            </ThemeIcon>
+          }
         >
-            <List.Item>Смотрим за серверами</List.Item>
-            <List.Item>Обеспечиваем безопасность</List.Item>
-            <List.Item>Все пользователи изолированы</List.Item>
-            <List.Item>Тех.поддежка на готове</List.Item>
+          <List.Item>Смотрим за серверами</List.Item>
+          <List.Item>Обеспечиваем безопасность</List.Item>
+          <List.Item>Все пользователи изолированы</List.Item>
+          <List.Item>Тех.поддежка на готове</List.Item>
         </List>
       </div>
       <img src='./mokup.png' className={classes.image} />
