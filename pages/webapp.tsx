@@ -30,8 +30,8 @@ const useStyles = createStyles((theme) => ({
 const WebApp = () => {
     //const { user, webApp } = useTelegram();
     const { classes } = useStyles();
-    //const { user, webApp } = useTelegram();
-    let user = '123';
+    const { user, webApp } = useTelegram();
+    //let user = '123';
     const [opened, { open, close }] = useDisclosure(false);
 
     let logs = `• Build: 4d9d4d9
