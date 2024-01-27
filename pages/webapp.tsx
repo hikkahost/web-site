@@ -1,6 +1,6 @@
 import { TelegramProvider, useTelegram } from "../components/provider";
 import { Container, Text, createStyles, ThemeIcon, Button, Paper, Center, Group, Badge, ScrollArea, Progress, Modal, Code } from '@mantine/core';
-import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink } from '@tabler/icons-react';
+import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink, IconSourceCode } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 
 const useStyles = createStyles((theme) => ({
@@ -14,15 +14,16 @@ const useStyles = createStyles((theme) => ({
 
     icon: {
         color: theme.colors.gray[0],
-        marginTop: -30,
+        marginTop: -50,
         marginBottom: 20,
     },
 }));
 
 const WebApp = () => {
-    const { user, webApp } = useTelegram();
+    //const { user, webApp } = useTelegram();
     const { classes } = useStyles();
     const [opened, { open, close }] = useDisclosure(false);
+    let user = 'user';
 
     let logs = `• Build: 4d9d4d9
 • Version: 1.6.4
@@ -38,7 +39,7 @@ const WebApp = () => {
 • Up-to-date`
 
     return (
-        <div>
+        <>
             {user ? (
                 /*<div>
                     <h1>Welcome {user?.username}</h1>
@@ -47,10 +48,10 @@ const WebApp = () => {
                     Eniter Web App data:
                     <pre>{JSON.stringify(webApp, null, 2)}</pre>
                 </div>*/
-                <Container style={{ textAlign: 'center' }} size="xs">
+                <Container style={{ textAlign: 'center', marginTop: 100 }} size="xs">
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
-                        <ThemeIcon className={classes.icon} size={60} radius={60}>
-                            <IconPlanet stroke={1.5} style={{ width: 40, height: 40 }} />
+                        <ThemeIcon className={classes.icon} size={90} radius={90}>
+                            <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
                         </ThemeIcon>
 
                         <Text size="lg" weight={700} mt={10}>
@@ -66,22 +67,22 @@ const WebApp = () => {
                         </Center>
                         <Center>
                             <Button.Group>
-                                <Button leftIcon={<IconPlayerPlayFilled stroke={1.5} style={{ width: 20, height: 20 }} />} onClick={open} variant="default">Logs</Button>
-                                <Button leftIcon={<IconPlayerStopFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">WEB</Button>
+                                <Button leftIcon={<IconSourceCode stroke={1.5} style={{ width: 20, height: 20 }} />} onClick={open} variant="default">Logs</Button>
+                                <Button leftIcon={<IconExternalLink stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">WEB</Button>
                             </Button.Group>
                         </Center>
 
                         <Center>
                             <Group mt="xs">
                                 <Text>
-                                    Subscribe:
+                                    Expires at
                                 </Text>
                                 <Text>
-                                    23.04.2024
+                                    27.02.2024
                                 </Text>
 
-                                <Badge variant="light" color="blue" size="xs">
-                                    3 days
+                                <Badge variant="light" color="blue">
+                                    30 days
                                 </Badge>
                             </Group>
                         </Center>
@@ -122,7 +123,7 @@ const WebApp = () => {
                 </Container>
             )
             }
-        </div>
+        </>
     );
 };
 
