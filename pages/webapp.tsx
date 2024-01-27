@@ -22,8 +22,8 @@ const useStyles = createStyles((theme) => ({
 const WebApp = () => {
     //const { user, webApp } = useTelegram();
     const { classes } = useStyles();
+    const { user, webApp } = useTelegram();
     const [opened, { open, close }] = useDisclosure(false);
-    let user = 'user';
 
     let logs = `• Build: 4d9d4d9
 • Version: 1.6.4
@@ -90,11 +90,17 @@ const WebApp = () => {
                         <Center>
                             <Paper radius="md" withBorder mt={20} style={{ textAlign: 'left', padding: 10, width: 300 }}>
                                 <Text size="sm" weight={700} mt={10} style={{ textAlign: 'left' }}>
-                                    CPU: 0.1 %
+                                    CPU:
+                                </Text>
+                                <Text size="sm" weight={700} style={{ textAlign: 'right', marginTop: -22 }}>
+                                    0.1 %
                                 </Text>
                                 <Progress value={1} color="blue" style={{ marginTop: 20 }} striped />
                                 <Text size="sm" weight={700} mt={10} style={{ textAlign: 'left' }}>
-                                    RAM: 237 / 1024 MB (23%)
+                                    RAM:
+                                </Text>
+                                <Text size="sm" weight={700} style={{ textAlign: 'right', marginTop: -22 }}>
+                                    237 / 1024 MB (23%)
                                 </Text>
                                 <Progress value={23} color="blue" style={{ marginTop: 20 }} striped />
                             </Paper>
