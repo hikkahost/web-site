@@ -1,4 +1,5 @@
 import { TelegramProvider, useTelegram } from "../components/provider";
+import { Dots } from "../components/dots";
 import { Container, Text, createStyles, ThemeIcon, Button, Paper, Center, Group, Badge, ScrollArea, Progress, Modal, Code } from '@mantine/core';
 import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink, IconSourceCode } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
@@ -10,6 +11,7 @@ const useStyles = createStyles((theme) => ({
         marginTop: 150,
         backgroundColor: theme.colors.gray[9],
         textAlign: 'center',
+        zIndex: 1
     },
 
     icon: {
@@ -17,12 +19,19 @@ const useStyles = createStyles((theme) => ({
         marginTop: -50,
         marginBottom: 20,
     },
+
+    dots: {
+        position: "absolute",
+        color: "#373a40",
+        zIndex: -1
+    }
 }));
 
 const WebApp = () => {
     //const { user, webApp } = useTelegram();
     const { classes } = useStyles();
-    const { user, webApp } = useTelegram();
+    //const { user, webApp } = useTelegram();
+    let user = '123';
     const [opened, { open, close }] = useDisclosure(false);
 
     let logs = `• Build: 4d9d4d9
@@ -49,6 +58,10 @@ const WebApp = () => {
                     <pre>{JSON.stringify(webApp, null, 2)}</pre>
                 </div>*/
                 <Container style={{ textAlign: 'center', marginTop: 100 }} size="xs">
+                    <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
+                    <Dots className={classes.dots} style={{ left: 120, top: 0 }} />
+                    <Dots className={classes.dots} style={{ left: 0, top: 300 }} />
+                    <Dots className={classes.dots} style={{ right: 0, top: 150 }} />
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
                         <ThemeIcon className={classes.icon} size={90} radius={90}>
                             <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
