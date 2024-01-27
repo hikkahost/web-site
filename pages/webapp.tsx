@@ -22,7 +22,7 @@ const useStyles = createStyles((theme) => ({
 
     dots: {
         position: "absolute",
-        color: "#373a40",
+        color: "#24262b",
         zIndex: -1
     }
 }));
@@ -68,7 +68,7 @@ const WebApp = () => {
                             <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
                         </ThemeIcon>
 
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg" weight={700}>
                             HikkaHost
                         </Text>
 
@@ -82,7 +82,7 @@ const WebApp = () => {
                         <Center>
                             <Button.Group>
                                 <Button leftIcon={<IconSourceCode stroke={1.5} style={{ width: 20, height: 20 }} />} onClick={open} variant="default">Logs</Button>
-                                <Button leftIcon={<IconExternalLink stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">WEB</Button>
+                                <Button leftIcon={<IconExternalLink stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Web</Button>
                             </Button.Group>
                         </Center>
 
