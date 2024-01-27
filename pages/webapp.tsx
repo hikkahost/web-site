@@ -62,6 +62,7 @@ const WebApp = () => {
                     <Dots className={classes.dots} style={{ left: 120, top: 0 }} />
                     <Dots className={classes.dots} style={{ left: 0, top: 300 }} />
                     <Dots className={classes.dots} style={{ right: 0, top: 150 }} />
+                    <Dots className={classes.dots} style={{ right: 60, bottom: 0 }} />
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
                         <ThemeIcon className={classes.icon} size={90} radius={90}>
                             <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
