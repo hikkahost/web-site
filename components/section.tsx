@@ -47,7 +47,7 @@ function Feature({ title, description, className, ...others }: FeatureProps) {
       <div className={classes.overlay} />
 
       <div className={classes.content}>
-        <Text weight={700} size="lg" mb="xs" mt={5} className={classes.title}>
+        <Text size="lg" mb="xs" mt={5} className={classes.title}>
           {title}
         </Text>
         <Text color="dimmed" size="sm">
@@ -81,7 +81,7 @@ export function FeaturesAsymmetrical() {
 
   return (
     <Container mt={30} mb={30} size="lg">
-      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} spacing={{ base: 10, sm: 'lg' }} verticalSpacing={{ base: 'md', sm: 'xl' }}>
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} spacing={{ base: 10, sm: 'lg' }} verticalSpacing={{ base: 'md', sm: 'xl' }}>
         {items}
       </SimpleGrid>
     </Container>

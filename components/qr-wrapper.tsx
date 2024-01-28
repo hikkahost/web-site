@@ -80,7 +80,7 @@ export function QRWrapper() {
         <Text size="lg" color="dimmed" mt={20}>
           Весь наш интерфейс находится <br />в Telegram боте для вашего удобства
         </Text>
-        <Button radius="xl" sx={{ height: 40 }} mt={20} onClick={() => { window.location.href = 'https://t.me/hikkahost_bot' }}>
+        <Button radius="xl" mt={20} onClick={() => { window.location.href = 'https://t.me/hikkahost_bot' }}>
           Перейти
         </Button>
       </div>

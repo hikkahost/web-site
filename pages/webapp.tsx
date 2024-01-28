@@ -1,6 +1,7 @@
 import { TelegramProvider, useTelegram } from "../components/provider";
+import { Dots } from "../components/dots";
 import { Container, Text, ThemeIcon, Button, Paper, Center, Group, Badge, ScrollArea, Progress, Modal, Code } from '@mantine/core';
-import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink } from '@tabler/icons-react';
+import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink, IconSourceCode } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
 import { createStyles } from '@mantine/styles';
 
@@ -11,18 +12,27 @@ const useStyles = createStyles((theme) => ({
         marginTop: 150,
         backgroundColor: theme.colors.gray[9],
         textAlign: 'center',
+        zIndex: 1
     },
 
     icon: {
         color: theme.colors.gray[0],
-        marginTop: -30,
+        marginTop: -50,
         marginBottom: 20,
     },
+
+    dots: {
+        position: "absolute",
+        color: "#24262b",
+        zIndex: -1
+    }
 }));
 
 const WebApp = () => {
-    const { user, webApp } = useTelegram();
+    //const { user, webApp } = useTelegram();
     const { classes } = useStyles();
+    //const { user, webApp } = useTelegram();
+    let user = '123';
     const [opened, { open, close }] = useDisclosure(false);
 
     let logs = `• Build: 4d9d4d9
@@ -39,7 +49,7 @@ const WebApp = () => {
 • Up-to-date`
 
     return (
-        <div>
+        <>
             {user ? (
                 /*<div>
                     <h1>Welcome {user?.username}</h1>
@@ -48,53 +58,64 @@ const WebApp = () => {
                     Eniter Web App data:
                     <pre>{JSON.stringify(webApp, null, 2)}</pre>
                 </div>*/
-                <Container style={{ textAlign: 'center' }} size="xs">
+                <Container style={{ textAlign: 'center', marginTop: 100 }} size="xs">
+                    <Dots className={classes.dots} style={{ left: 0, top: 0 }} />
+                    <Dots className={classes.dots} style={{ left: 120, top: 0 }} />
+                    <Dots className={classes.dots} style={{ left: 0, top: 300 }} />
+                    <Dots className={classes.dots} style={{ right: 0, top: 150 }} />
+                    <Dots className={classes.dots} style={{ right: 60, bottom: 0 }} />
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
-                        <ThemeIcon className={classes.icon} size={60} radius={60}>
-                            <IconPlanet stroke={1.5} style={{ width: 40, height: 40 }} />
+                        <ThemeIcon className={classes.icon} size={90} radius={90}>
+                            <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
                         </ThemeIcon>
 
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg">
                             HikkaHost
                         </Text>
 
                         <Center>
                             <Button.Group style={{ marginTop: 30 }}>
-                                <Button leftIcon={<IconPlayerPlayFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Start</Button>
-                                <Button leftIcon={<IconPlayerStopFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Stop</Button>
-                                <Button leftIcon={<IconRefresh stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Restart</Button>
+                                <Button leftSection={<IconPlayerPlayFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Start</Button>
+                                <Button leftSection={<IconPlayerStopFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Stop</Button>
+                                <Button leftSection={<IconRefresh stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Restart</Button>
                             </Button.Group>
                         </Center>
                         <Center>
                             <Button.Group>
-                                <Button leftIcon={<IconPlayerPlayFilled stroke={1.5} style={{ width: 20, height: 20 }} />} onClick={open} variant="default">Logs</Button>
-                                <Button leftIcon={<IconPlayerStopFilled stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">WEB</Button>
+                                <Button leftSection={<IconSourceCode stroke={1.5} style={{ width: 20, height: 20 }} />} onClick={open} variant="default">Logs</Button>
+                                <Button leftSection={<IconExternalLink stroke={1.5} style={{ width: 20, height: 20 }} />} variant="default">Web</Button>
                             </Button.Group>
                         </Center>
 
                         <Center>
                             <Group mt="xs">
                                 <Text>
-                                    Subscribe:
+                                    Expires at
                                 </Text>
                                 <Text>
-                                    23.04.2024
+                                    27.02.2024
                                 </Text>
 
-                                <Badge variant="light" color="blue" size="xs">
-                                    3 days
+                                <Badge variant="light" color="blue">
+                                    30 days
                                 </Badge>
                             </Group>
                         </Center>
 
                         <Center>
                             <Paper radius="md" withBorder mt={20} style={{ textAlign: 'left', padding: 10, width: 300 }}>
-                                <Text size="sm" weight={700} mt={10} style={{ textAlign: 'left' }}>
-                                    CPU: 0.1 %
+                                <Text size="sm" mt={10} style={{ textAlign: 'left' }}>
+                                    CPU:
+                                </Text>
+                                <Text size="sm" style={{ textAlign: 'right', marginTop: -22 }}>
+                                    0.1 %
                                 </Text>
                                 <Progress value={1} color="blue" style={{ marginTop: 20 }} striped />
-                                <Text size="sm" weight={700} mt={10} style={{ textAlign: 'left' }}>
-                                    RAM: 237 / 1024 MB (23%)
+                                <Text size="sm" mt={10} style={{ textAlign: 'left' }}>
+                                    RAM:
+                                </Text>
+                                <Text size="sm" style={{ textAlign: 'right', marginTop: -22 }}>
+                                    237 / 1024 MB (23%)
                                 </Text>
                                 <Progress value={23} color="blue" style={{ marginTop: 20 }} striped />
                             </Paper>
@@ -112,18 +133,18 @@ const WebApp = () => {
             ) : (
                 <Container style={{ textAlign: 'center' }} size="xs">
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg" mt={10}>
                             HikkaHost
                         </Text>
 
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg" mt={10}>
                             Open this page in Telegram bot
                         </Text>
                     </Paper>
                 </Container>
             )
             }
-        </div>
+        </>
     );
 };
 

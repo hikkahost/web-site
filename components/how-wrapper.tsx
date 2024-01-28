@@ -82,7 +82,7 @@ export function HowWrapper() {
   return (
     <div className={classes.wrapper}>
       <div className={classes.body}>
-        <Text weight={500} size="lg" mb={5}>
+        <Text size="lg" mb={5}>
           Как мы работаем?
         </Text>
         <Title className={classes.title}>Слаженно и активно!</Title>
