@@ -6,19 +6,25 @@ export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse
 ) {
-    const { userId } = req.query;
+    const { token } = req.query;
+
+    if (!token) {
+        return res.status(400).json({ error: "Invalid token" });
+    }
+
+    let userId = token.toString().split(":")[0];
 
     const response = await fetch(
-        `http://api.hikkahost.tech:7777/api/user/${userId}`,
+        `http://api.hikkahost.tech:7777/api/host/${userId}`,
         {
             headers: {
                 "Content-Type": "application/json",
-                "token": ""
+                "token": token.toString()
             },
         }
     );
 
     var data: any = await response.json();
 
-    return res.status(200).json({ response: data });
+    return res.status(200).json({ data });
 }
