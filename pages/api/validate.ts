@@ -4,6 +4,55 @@ import fetch from 'node-fetch';
 
 type Data = { ok: string } | { error: any };
 
+type TransformInitData = {
+    [k: string]: string;
+};
+
+function transformInitData(initData: string): TransformInitData {
+    return Object.fromEntries(new URLSearchParams(initData));
+}
+
+async function validate(data: TransformInitData, botToken: string) {
+    const encoder = new TextEncoder();
+
+    const checkString = Object.keys(data)
+        .filter((key) => key !== "hash")
+        .map((key) => `${key}=${data[key]}`)
+        .sort()
+        .join("\n");
+
+    const subtle = webcrypto.subtle;
+
+    const secretKey = await subtle.importKey(
+        "raw",
+        encoder.encode("WebAppData"),
+        { name: "HMAC", hash: "SHA-256" },
+        true,
+        ["sign"]
+    );
+    const secret = await subtle.sign("HMAC", secretKey, encoder.encode(botToken));
+    const signatureKey = await subtle.importKey(
+        "raw",
+        secret,
+        { name: "HMAC", hash: "SHA-256" },
+        true,
+        ["sign"]
+    );
+    const signature = await subtle.sign(
+        "HMAC",
+        signatureKey,
+        encoder.encode(checkString)
+    );
+
+    //const hex = [...new Uint8Array(signature)]
+    //    .map((b) => b.toString(16).padStart(2, "0"))
+    //    .join("");
+
+    const hex = Buffer.from(signature).toString('hex');
+
+    return data.hash === hex;
+}
+
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     if (req.method !== 'POST') {
         return res.status(405).json({ error: 'Method not allowed' });
@@ -25,13 +74,14 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
         return res.status(500).json({ error: 'Internal server error' });
     }
 
-    const data = Object.fromEntries(new URLSearchParams(req.body.hash));
-    const isValid = await isHashValid(data, process.env.BOT_TOKEN);
+    const data = transformInitData(req.body.hash);
+    const isOk = await validate(
+        data,
+        process.env.BOT_TOKEN!
+    );
     const userId = req.body.userId;
 
-    return res.status(403).json({ error: isValid });
-
-    if (isValid) {
+    if (isOk) {
         const response = await (await fetch(
             `http://api.hikkahost.tech:7777/api/user/${userId}/token`,
             {
@@ -46,73 +96,4 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     return res.status(403).json({ error: 'Invalid hash' });
-}
-
-async function isHashValid(data: Record<string, string>, botToken: string) {
-    const encoder = new TextEncoder();
-
-    const checkString = Object.keys(data)
-        .filter((key) => key !== 'hash')
-        .map((key) => `${key}=${data[key]}`)
-        .sort()
-        .join('\n');
-
-    const secretKey = await webcrypto.subtle.importKey(
-        'raw',
-        encoder.encode('WebAppData'),
-        { name: 'HMAC', hash: 'SHA-256' },
-        true,
-        ['sign']
-    );
-
-    const secret = await webcrypto.subtle.sign('HMAC', secretKey, encoder.encode(botToken));
-
-    const signatureKey = await webcrypto.subtle.importKey(
-        'raw',
-        secret,
-        { name: 'HMAC', hash: 'SHA-256' },
-        true,
-        ['sign']
-    );
-
-    const signature = await webcrypto.subtle.sign('HMAC', signatureKey, encoder.encode(checkString));
-
-    const hex = Buffer.from(signature).toString('hex');
-
-    return {
-        hex: hex,
-    }
-
-    return data.hash === hex;
-}
-
-function isValidHash1(parsedData: any, bot_token: string) {
-    // Get Telegram hash
-    const hash = parsedData.hash
-
-    // Remove 'hash' value & Sort alphabetically
-    const data_keys = Object.keys(parsedData).filter(v => v !== 'hash').sort()
-
-    // Create line format key=<value>
-    const items = data_keys.map(key => key + '=' + parsedData[key])
-
-    const data_check_string = items.join('\n')
-
-    function HMAC_SHA256(value: string, key: string) {
-        const crypto = require('crypto');
-        return crypto.createHmac('sha256', key).update(value).digest()
-    }
-
-    function hex(bytes: any) {
-        return bytes.toString('hex');
-    }
-
-    // Generate secret key
-    const secret_key = HMAC_SHA256(bot_token, 'WebAppData')
-
-    // Generate hash to validate
-    const hashGenerate = hex(HMAC_SHA256(data_check_string, secret_key))
-
-    // Return bool value is valid
-    return Boolean(hashGenerate === hash)
 }
