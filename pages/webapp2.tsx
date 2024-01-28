@@ -133,7 +133,7 @@ const WebApp = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ hash: webApp?.initDataUnsafe.hash, userId: user?.id })
+            body: JSON.stringify({ hash: webApp?.initDataUnsafe, userId: user?.id })
         })
             .then(res => res.json())
             .then(json => {
