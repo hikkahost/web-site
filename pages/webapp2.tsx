@@ -168,9 +168,10 @@ const WebApp = ({ token }: any) => {
                 });
         }, 5000);
         return () => clearInterval(Id);
-    }, []);
+    }, [token]);
 
     useEffect(() => {
+        if (!token) return;
         fetch(`/api/expired?token=${token}`)
             .then(res => res.json())
             .then(json => {
@@ -182,7 +183,7 @@ const WebApp = ({ token }: any) => {
                 setDays(Math.round((end.getTime() - now.getTime()) / (1000 * 3600 * 24)));
             });
         toggle();
-    }, []);
+    }, [token]);
 
     return (
         <Box pos="relative">
