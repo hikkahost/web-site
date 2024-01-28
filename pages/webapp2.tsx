@@ -122,10 +122,10 @@ const WebApp = () => {
                     <pre>{JSON.stringify(webApp, null, 2)}</pre>
                 </div>*/
                 <Container style={{ textAlign: 'center' }} size="xs">
-                    <ThemeIcon size={120} radius={120} color="#007AFF" mt={40}>
-                        <IconPlanet stroke={1.5} style={{ width: 100, height: 100 }} />
+                    <ThemeIcon size={80} radius={120} color="#007AFF" mt={10}>
+                        <IconPlanet stroke={1.5} style={{ width: 64, height: 64 }} />
                     </ThemeIcon>
-                    <Title order={1} mt={30}>
+                    <Title order={1} mt={20}>
                         HikkaHost
                     </Title>
 
