@@ -77,5 +77,40 @@ async function isHashValid(data: Record<string, string>, botToken: string) {
 
     const hex = Buffer.from(signature).toString('hex');
 
+    return {
+        hex: hex,
+    }
+
     return data.hash === hex;
+}
+
+function isValidHash1(parsedData: any, bot_token: string) {
+    // Get Telegram hash
+    const hash = parsedData.hash
+
+    // Remove 'hash' value & Sort alphabetically
+    const data_keys = Object.keys(parsedData).filter(v => v !== 'hash').sort()
+
+    // Create line format key=<value>
+    const items = data_keys.map(key => key + '=' + parsedData[key])
+
+    const data_check_string = items.join('\n')
+
+    function HMAC_SHA256(value: string, key: string) {
+        const crypto = require('crypto');
+        return crypto.createHmac('sha256', key).update(value).digest()
+    }
+
+    function hex(bytes: any) {
+        return bytes.toString('hex');
+    }
+
+    // Generate secret key
+    const secret_key = HMAC_SHA256(bot_token, 'WebAppData')
+
+    // Generate hash to validate
+    const hashGenerate = hex(HMAC_SHA256(data_check_string, secret_key))
+
+    // Return bool value is valid
+    return Boolean(hashGenerate === hash)
 }
