@@ -133,12 +133,12 @@ const WebApp = () => {
                         Your hosting panel
                     </Text>
 
-                    <Group mt={20}>
+                    <Group mt={20} style={{ position: 'relative' }}>
                         <Text mt={10} size={'16px'} style={{ width: 160 }}>
                             Expires at 2024-01-26
                         </Text>
 
-                        <Badge variant="light" color="blue" mt={10} style={{ marginLeft: 'calc(100% - 250px)' }}>
+                        <Badge variant="light" color="blue" mt={10} style={{ position: 'absolute', right: 0 }}>
                             30days
                         </Badge>
                     </Group>
@@ -184,11 +184,11 @@ const WebApp = () => {
                             <Tabs.Tab value="ram" ref={secondTabRef} className={classes.tab}>
                                 RAM
                             </Tabs.Tab>
-                            <Tabs.Tab value="ping" className={classes.tab}>Ping</Tabs.Tab>
+                            <Tabs.Tab value="ping" className={classes.tab}>PING</Tabs.Tab>
                         </Tabs.List>
 
-                        <Center mt={20}>
-                            <Tabs.Panel value="cpu" className={classes.tabs} p={10}>
+                        <Center mt={10}>
+                            <Tabs.Panel value="cpu" className={classes.tabs} p={10} style={{ width: '100%' }}>
                                 <Text size="sm" mt={10} style={{ textAlign: 'left' }} ml={15}>
                                     4 cores
                                     <Badge variant="light" color="blue" ml={15}>
@@ -197,16 +197,16 @@ const WebApp = () => {
                                 </Text>
 
                                 <Sparkline
-                                    w={300}
+                                    w={'100%'}
                                     h={80}
-                                    data={[10, 20, 40, 20, 40, 10, 50]}
+                                    data={[40, 20, 40, 10, 50, 10, 20, 40, 20, 40, 10, 50]}
                                     curveType="linear"
                                     color="blue"
                                     fillOpacity={0.6}
                                     strokeWidth={2}
                                 />
                             </Tabs.Panel>
-                            <Tabs.Panel value="ram" className={classes.tabs} p={10}>
+                            <Tabs.Panel value="ram" className={classes.tabs} p={10} style={{ width: '100%' }}>
                                 <Text size="sm" mt={10} style={{ textAlign: 'left' }} ml={15}>
                                     240 / 1024 MB
                                     <Badge variant="light" color="blue" ml={15}>
@@ -215,27 +215,27 @@ const WebApp = () => {
                                 </Text>
 
                                 <Sparkline
-                                    w={300}
+                                    w={'100%'}
                                     h={80}
-                                    data={[10, 20, 40, 20, 40, 10, 50]}
+                                    data={[10, 20, 40, 20, 40, 10, 20, 40, 20, 40, 10, 50]}
                                     curveType="linear"
                                     color="blue"
                                     fillOpacity={0.6}
                                     strokeWidth={2}
                                 />
                             </Tabs.Panel>
-                            <Tabs.Panel value="ping" className={classes.tabs} p={10}>
+                            <Tabs.Panel value="ping" className={classes.tabs} p={10} style={{ width: '100%' }}>
                                 <Text size="sm" mt={10} style={{ textAlign: 'left' }} ml={15}>
-                                    0.1 ms
+                                    102.1 ms
                                     <Badge variant="light" color="blue" ml={15}>
-                                        ~ 0.1 ms
+                                        ~ 100 ms
                                     </Badge>
                                 </Text>
 
                                 <Sparkline
-                                    w={300}
+                                    w={'100%'}
                                     h={80}
-                                    data={[10, 20, 40, 20, 40, 10, 50]}
+                                    data={[10, 20, 40, 20, 40, 10, 50, 10, 20, 40, 20, 40, 10, 50]}
                                     curveType="linear"
                                     color="blue"
                                     fillOpacity={0.6}
