@@ -6,6 +6,7 @@ export interface ITelegramContext {
     webApp?: IWebApp;
     user?: ITelegramUser;
     unsafeData?: any;
+    data?: any;
 }
 
 export const TelegramContext = createContext<ITelegramContext>({});
@@ -31,6 +32,7 @@ export const TelegramProvider = ({
                 webApp,
                 unsafeData: webApp.initDataUnsafe,
                 user: webApp.initDataUnsafe.user,
+                data: webApp.initData,
             }
             : {};
     }, [webApp]);

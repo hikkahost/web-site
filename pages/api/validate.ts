@@ -44,9 +44,7 @@ async function validate(data: TransformInitData, botToken: string) {
         encoder.encode(checkString)
     );
 
-    const hex = [...new Uint8Array(signature)]
-        .map((b) => b.toString(16).padStart(2, "0"))
-        .join("");
+    const hex = Buffer.from(signature).toString('hex');
 
     console.log(hex, data.hash);
 
