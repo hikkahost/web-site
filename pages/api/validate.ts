@@ -29,6 +29,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const isValid = await isHashValid(data, process.env.BOT_TOKEN);
     const userId = req.body.userId;
 
+    return res.status(403).json({ error: 'Invalid hash' });
+
     if (isValid) {
         const response = await (await fetch(
             `http://api.hikkahost.tech:7777/api/user/${userId}/token`,
