@@ -1,4 +1,5 @@
-import { createStyles, Text, SimpleGrid, Container } from '@mantine/core';
+import { Text, SimpleGrid, Container } from '@mantine/core';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
   feature: {
@@ -80,7 +81,7 @@ export function FeaturesAsymmetrical() {
 
   return (
     <Container mt={30} mb={30} size="lg">
-      <SimpleGrid cols={3} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} spacing={50}>
+      <SimpleGrid cols={{ base: 1, sm: 2, lg: 3 }} breakpoints={[{ maxWidth: 'sm', cols: 1 }]} spacing={{ base: 10, sm: 'lg' }} verticalSpacing={{ base: 'md', sm: 'xl' }}>
         {items}
       </SimpleGrid>
     </Container>

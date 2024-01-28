@@ -1,5 +1,6 @@
-import { createStyles, Text, Title, List, ThemeIcon } from '@mantine/core';
+import { Text, Title, List, ThemeIcon } from '@mantine/core';
 import { IconArrowRight } from '@tabler/icons-react';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {

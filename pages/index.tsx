@@ -6,7 +6,8 @@ import { PaymentWrapper } from '../components/payment-wrapper';
 import { FooterLinks } from '../components/footer';
 import { QRWrapper } from '../components/qr-wrapper';
 
-import { createStyles, Container } from '@mantine/core';
+import { Container } from '@mantine/core';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
   font: {

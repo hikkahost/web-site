@@ -1,5 +1,6 @@
-import { createStyles, Text, Container, ActionIcon, Group } from '@mantine/core';
+import { Text, Container, ActionIcon, Group } from '@mantine/core';
 import { Logo } from './logo';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
   footer: {
@@ -7,9 +8,8 @@ const useStyles = createStyles((theme) => ({
     paddingTop: theme.spacing.xl * 2,
     paddingBottom: theme.spacing.xl * 2,
     backgroundColor: theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.colors.gray[0],
-    borderTop: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
-    }`,
+    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[5] : theme.colors.gray[2]
+      }`,
   },
 
   logo: {
@@ -81,9 +81,8 @@ const useStyles = createStyles((theme) => ({
     marginTop: theme.spacing.xl,
     paddingTop: theme.spacing.xl,
     paddingBottom: theme.spacing.xl,
-    borderTop: `1px solid ${
-      theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
-    }`,
+    borderTop: `1px solid ${theme.colorScheme === 'dark' ? theme.colors.dark[4] : theme.colors.gray[2]
+      }`,
 
     [theme.fn.smallerThan('sm')]: {
       flexDirection: 'column',
@@ -133,7 +132,7 @@ export function FooterLinks({ data }: FooterLinksProps) {
         <div className={classes.logo}>
           <Logo />
           <Text size="xs" color="dimmed" className={classes.description}>
-            
+
           </Text>
         </div>
         <div className={classes.groups}>{groups}</div>

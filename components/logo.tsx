@@ -1,4 +1,4 @@
-import { createStyles } from '@mantine/core';
+import { createStyles } from '@mantine/styles';
 import Link from 'next/link';
 
 const useStyles = createStyles((theme) => ({
@@ -7,8 +7,9 @@ const useStyles = createStyles((theme) => ({
     cursor: 'pointer',
     fontSize: '1.7rem',
     fontWeight: 'bolder',
+    color: 'black',
 
-    [theme.fn.smallerThan('sm')]: {
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       fontSize: '1.4rem',
     },
   },
@@ -16,7 +17,8 @@ const useStyles = createStyles((theme) => ({
     width: '64px',
     display: 'inline-block',
     margin: '5px',
-    marginTop: '-5px'
+    marginTop: '-5px',
+    verticalAlign: 'middle',
   },
   link: {
     color: 'white',

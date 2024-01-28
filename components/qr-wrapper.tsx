@@ -1,4 +1,5 @@
-import { createStyles, Text, Title, Button } from '@mantine/core';
+import { Text, Title, Button } from '@mantine/core';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
   wrapper: {
@@ -20,7 +21,7 @@ const useStyles = createStyles((theme) => ({
   image: {
     maxWidth: '35%',
     //position: 'relative',
-    
+
     float: 'right',
     marginLeft: 'auto',
     order: 2,
@@ -77,10 +78,10 @@ export function QRWrapper() {
       <div className={classes.body}>
         <Title className={classes.title}>Переходите в нашего <br />бота в Telegram</Title>
         <Text size="lg" color="dimmed" mt={20}>
-            Весь наш интерфейс находится <br />в Telegram боте для вашего удобства
+          Весь наш интерфейс находится <br />в Telegram боте для вашего удобства
         </Text>
-        <Button radius="xl" sx={{ height: 40 }} mt={20} onClick={() => {window.location.href = 'https://t.me/hikkahost_bot'}}>
-          Перейти 
+        <Button radius="xl" sx={{ height: 40 }} mt={20} onClick={() => { window.location.href = 'https://t.me/hikkahost_bot' }}>
+          Перейти
         </Button>
       </div>
       <img src='./qr.png' className={classes.image} />

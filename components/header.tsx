@@ -1,38 +1,24 @@
 import {
-  createStyles,
-  Header,
   Container,
   Group,
   Button,
   Burger,
+  AppShell,
+  Center
 } from '@mantine/core';
 import { useDisclosure } from '@mantine/hooks';
 import { Logo } from '../components/logo';
+import { createStyles } from '@mantine/styles';
 
 const HEADER_HEIGHT = 60;
 
-const useStyles = createStyles((theme) => ({
+const useStyles = createStyles((theme, _params, getRef) => ({
   inner: {
     height: HEADER_HEIGHT,
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
-  },
-
-  links: {
-    [theme.fn.smallerThan('sm')]: {
-      display: 'none',
-    },
-  },
-
-  burger: {
-    float: 'right',
-    marginLeft: 'auto',
-    order: 2,
-    [theme.fn.largerThan('sm')]: {
-      display: 'none',
-    },
-    display: 'none',
+    backgroundColor: 'white',
   },
 
   link: {
@@ -57,16 +43,32 @@ const useStyles = createStyles((theme) => ({
   button: {
     fontSize: theme.fontSizes.sm + 4,
 
-    [theme.fn.smallerThan('sm')]: {
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       display: 'none',
     },
   },
 
   header: {
     marginBottom: 120,
+    border: 'none',
+    backgroundColor: 'white',
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'none',
+    },
+  },
 
-    [theme.fn.smallerThan('sm')]: {
-      marginBottom: 0,
+  links: {
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'none',
+    },
+  },
+
+  mobile: {
+    display: 'none',
+    textAlign: 'center',
+    margin: 30,
+    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+      display: 'block',
     },
   },
 }));
@@ -84,7 +86,6 @@ const links = [
 
 export function HeaderAction() {
   const { classes } = useStyles();
-  const [opened, { toggle }] = useDisclosure(false);
 
   const items = links.map((link) => {
     return (
@@ -99,19 +100,29 @@ export function HeaderAction() {
   });
 
   return (
-    <Header height={HEADER_HEIGHT} sx={{ borderBottom: 0 }} p={30} className={classes.header}>
-      <Container className={classes.inner} fluid>
-        <Group>
-          <Logo />
-          <Burger opened={opened} onClick={toggle} className={classes.burger} size="sm" />
-        </Group>
-        <Group spacing={5} className={classes.links}>
-          {items}
-        </Group>
-        <Button radius="xl" sx={{ height: 40 }} className={classes.button} onClick={() => {window.location.href = 'https://t.me/hikkahost_bot'}}>
-          Перейти в бота
-        </Button>
-      </Container>
-    </Header>
+    <>
+      <Center>
+        <Logo className={classes.mobile} />
+      </Center>
+      <AppShell
+        header={{ height: HEADER_HEIGHT }}
+        className={classes.header}
+        padding="md"
+      >
+        <AppShell.Header p={30} style={{ border: 'none', position: 'absolute', width: '100%' }}>
+          <Container className={classes.inner} size="xl">
+            <Group>
+              <Logo />
+            </Group>
+            <Group className={classes.links}>
+              {items}
+            </Group>
+            <Button radius="xl" className={classes.button} onClick={() => { window.location.href = 'https://t.me/hikkahost_bot' }}>
+              Перейти в бота
+            </Button>
+          </Container>
+        </AppShell.Header>
+      </AppShell>
+    </>
   );
 }

@@ -1,38 +1,33 @@
-import { AppProps } from "next/app";
 import Head from "next/head";
-import { MantineProvider, ColorSchemeProvider, ColorScheme } from '@mantine/core';
-import { useHotkeys, useLocalStorage } from '@mantine/hooks';
-
+import { MantineProvider, createTheme, rem } from "@mantine/core";
+import '@mantine/core/styles.css';
 import "@fontsource/golos-ui";
 
-export default function App(props: AppProps) {
-  const { Component, pageProps } = props;
-  const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
-    key: 'mantine-color-scheme',
-    defaultValue: 'dark',
-    getInitialValueInEffect: true,
-  });
+const theme = createTheme({
+  fontFamily: 'Golos UI',
+  primaryColor: 'cyan',
 
-  const toggleColorScheme = (value?: ColorScheme) =>
-    setColorScheme(value || (colorScheme === 'dark' ? 'light' : 'dark'));
+  /** Customization */
+  headings: {
+    fontFamily: 'Golos UI',
+  },
+});
 
-  useHotkeys([['mod+J', () => toggleColorScheme()]]);
+export default function App({ Component, pageProps }: any) {
 
   return (
     <>
-      <Head>
-        <title>HikkaHost</title>
-        <link rel="shortcut icon" href="/logo.png" />
-        <meta
-          name="viewport"
-          content="minimum-scale=1, initial-scale=1, width=device-width"
-        />
-      </Head>
-      <ColorSchemeProvider colorScheme={colorScheme} toggleColorScheme={toggleColorScheme}>
-        <MantineProvider theme={{ colorScheme, loader: 'bars', fontFamily: 'Golos UI' }} withGlobalStyles withNormalizeCSS >
-          <Component {...pageProps} />
-        </MantineProvider>
-      </ColorSchemeProvider>
+      <MantineProvider theme={theme} cssVariablesSelector="html" classNamesPrefix="hikkahost">
+        <Head>
+          <title>HikkaHost</title>
+          <link rel="shortcut icon" href="/logo.png" />
+          <meta
+            name="viewport"
+            content="minimum-scale=1, initial-scale=1, width=device-width"
+          />
+        </Head>
+        <Component {...pageProps} />
+      </MantineProvider>
     </>
   );
 }

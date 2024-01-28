@@ -1,7 +1,8 @@
 import { TelegramProvider, useTelegram } from "../components/provider";
-import { Container, Text, createStyles, ThemeIcon, Button, Paper, Center, Group, Badge, ScrollArea, Progress, Modal, Code } from '@mantine/core';
+import { Container, Text, ThemeIcon, Button, Paper, Center, Group, Badge, ScrollArea, Progress, Modal, Code } from '@mantine/core';
 import { IconPlanet, IconPlayerPlayFilled, IconPlayerStopFilled, IconRefresh, IconExternalLink } from '@tabler/icons-react';
 import { useDisclosure } from '@mantine/hooks';
+import { createStyles } from '@mantine/styles';
 
 const useStyles = createStyles((theme) => ({
     card: {
