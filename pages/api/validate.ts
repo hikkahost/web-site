@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const isValid = await isHashValid(data, process.env.BOT_TOKEN);
     const userId = req.body.userId;
 
-    return res.status(403).json({ error: 'Invalid hash' });
+    return res.status(403).json({ error: isValid.toString() });
 
     if (isValid) {
         const response = await (await fetch(
