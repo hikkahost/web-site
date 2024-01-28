@@ -126,6 +126,8 @@ const WebApp = () => {
     const [token, setToken] = useState('');
 
     useEffect(() => {
+        if (!webApp) return;
+        if (!webApp?.initDataUnsafe.hash) return;
         fetch('/api/validate', {
             method: 'POST',
             headers: {
