@@ -5,14 +5,14 @@ import fetch from 'node-fetch';
 type Data = { ok: string } | { error: any };
 
 type TransformInitData = {
-    [k: string]: string;
+    [k: string]: string | { hash: string };
 };
 
 function transformInitData(initData: string): TransformInitData {
     return Object.fromEntries(new URLSearchParams(initData));
 }
 
-async function validate(data: TransformInitData, botToken: string) {
+async function validate(data: any, botToken: string) {
     const encoder = new TextEncoder();
 
     const checkString = Object.keys(data)
@@ -50,7 +50,7 @@ async function validate(data: TransformInitData, botToken: string) {
 
     const hex = Buffer.from(signature).toString('hex');
 
-    return data.hash === hex;
+    return data.hash.hash === hex;
 }
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
