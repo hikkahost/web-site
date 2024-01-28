@@ -66,8 +66,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
   mobile: {
     display: 'none',
     textAlign: 'center',
-    margin: 30,
-    [`@media (min-width: ${theme.breakpoints.sm}px)`]: {
+    [`@media (max-width: ${theme.breakpoints.sm}px)`]: {
       display: 'block',
     },
   },
@@ -101,8 +100,8 @@ export function HeaderAction() {
 
   return (
     <>
-      <Center>
-        <Logo className={classes.mobile} />
+      <Center className={classes.mobile}>
+        <Logo />
       </Center>
       <AppShell
         header={{ height: HEADER_HEIGHT }}

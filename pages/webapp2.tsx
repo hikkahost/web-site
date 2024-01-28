@@ -29,12 +29,12 @@ const WebApp = () => {
                         HikkaHost
                     </Title>
 
-                    <Text size="xl" weight={500} mt={10}>
+                    <Text size="xl" mt={10}>
                         Your hosting panel
                     </Text>
 
                     <Group mt={20}>
-                        <Text size="md" weight={500} mt={10}>
+                        <Text size="md" mt={10}>
                             Expires at 2024-01-26
                         </Text>
 
@@ -58,11 +58,11 @@ const WebApp = () => {
             ) : (
                 <Container style={{ textAlign: 'center' }} size="xs">
                     <Paper radius="md" withBorder className={classes.card} mt={20}>
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg" mt={10}>
                             HikkaHost
                         </Text>
 
-                        <Text size="lg" weight={700} mt={10}>
+                        <Text size="lg" mt={10}>
                             Open this page in Telegram bot
                         </Text>
                     </Paper>
