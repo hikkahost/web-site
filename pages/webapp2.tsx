@@ -113,7 +113,16 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
 
 const WebApp = () => {
-    const { user, webApp } = useTelegram();
+    const { user, webApp, unsafeData } = useTelegram();
+    //const user = {
+    //    id: 1218845111,
+    //    username: 'test'
+    //};
+    //const webApp = {
+    //    initDataUnsafe: {
+    //        hash: 'test'
+    //    }
+    //};
     const [token, setToken] = useState('');
 
     useEffect(() => {
@@ -122,7 +131,7 @@ const WebApp = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ hash: webApp?.initDataUnsafe.hash, userId: user?.id })
+            body: JSON.stringify({ hash: unsafeData?.hash, userId: user?.id })
         })
             .then(res => res.json())
             .then(json => {

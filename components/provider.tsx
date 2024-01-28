@@ -5,6 +5,7 @@ import type { ITelegramUser, IWebApp } from "./types";
 export interface ITelegramContext {
     webApp?: IWebApp;
     user?: ITelegramUser;
+    unsafeData?: any;
 }
 
 export const TelegramContext = createContext<ITelegramContext>({});
