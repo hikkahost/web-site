@@ -112,8 +112,32 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 }));
 
 
-const WebApp = ({ token }: any) => {
+const WebApp = () => {
     const { user, webApp } = useTelegram();
+    const [token, setToken] = useState('');
+
+    useEffect(() => {
+        fetch('/api/validate', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ hash: webApp?.initDataUnsafe.hash, userId: user?.id })
+        })
+            .then(res => res.json())
+            .then(json => {
+                if (!json.ok) {
+                    window.location.href = 'https://hikkahost.tech';
+                }
+                setToken(json.ok);
+            })
+            .catch(err => {
+                console.log(err);
+                window.location.href = 'https://hikkahost.tech';
+            }
+            );
+    }, [webApp]);
+
     //const user = 'test';
     const [visible, { open, close, toggle }] = useDisclosure(true);
     const { classes } = useStyles();
@@ -376,7 +400,7 @@ const WebApp = ({ token }: any) => {
                     </>
                 ) : (
                     <Container style={{ textAlign: 'center' }} size="xs">
-                        <Paper radius="md" withBorder className={classes.card} mt={20}>
+                        <Paper radius="md" withBorder className={classes.card} mt={20} style={{ backgroundColor: '#1C1C1D' }}>
                             <Text size="lg" mt={10}>
                                 HikkaHost
                             </Text>
@@ -394,12 +418,9 @@ const WebApp = ({ token }: any) => {
 };
 
 export default function WebAppPage() {
-    const searchParams = useSearchParams()
-
-    const token = searchParams.get('token')
     return (
         <TelegramProvider>
-            <WebApp token={token} />
+            <WebApp />
         </TelegramProvider>
     );
 };
