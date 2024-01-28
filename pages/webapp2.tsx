@@ -131,18 +131,17 @@ const WebApp = () => {
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify({ hash: unsafeData?.hash, userId: user?.id })
+            body: JSON.stringify({ hash: webApp?.initDataUnsafe.hash, userId: user?.id })
         })
             .then(res => res.json())
             .then(json => {
                 if (!json.ok) {
-                    window.location.href = 'https://hikkahost.tech';
+                    console.log(json);
                 }
                 setToken(json.ok);
             })
             .catch(err => {
                 console.log(err);
-                window.location.href = 'https://hikkahost.tech';
             }
             );
     }, [webApp]);
