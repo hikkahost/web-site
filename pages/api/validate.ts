@@ -2,7 +2,7 @@ import { webcrypto } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 
-type Data = { ok: string } | { error: string };
+type Data = { ok: string } | { error: any };
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     if (req.method !== 'POST') {
@@ -29,7 +29,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     const isValid = await isHashValid(data, process.env.BOT_TOKEN);
     const userId = req.body.userId;
 
-    return res.status(403).json({ error: isValid.toString() });
+    return res.status(403).json({ error: isValid });
 
     if (isValid) {
         const response = await (await fetch(
