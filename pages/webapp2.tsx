@@ -191,6 +191,7 @@ const WebApp = () => {
     };
 
     useEffect(() => {
+        if (!token) return;
         const Id = setInterval(() => {
             fetch(`/api/host?token=${token}`)
                 .then(res => res.json())
