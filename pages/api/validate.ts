@@ -1,4 +1,4 @@
-import { webcrypto } from 'crypto';
+import { createHmac } from 'crypto';
 import type { NextApiRequest, NextApiResponse } from 'next';
 import fetch from 'node-fetch';
 
@@ -12,46 +12,25 @@ function transformInitData(initData: string): TransformInitData {
     return Object.fromEntries(new URLSearchParams(initData));
 }
 
-async function validate(data: any, botToken: string) {
-    const encoder = new TextEncoder();
+const verifyTelegramWebAppData = async (telegramInitData: any, TELEGRAM_BOT_TOKEN: string) => {
+    // HMAC-SHA-256 signature of the bot's token with the constant string WebAppData used as a key.
+    const secret = createHmac('sha256', 'WebAppData')
+        .update(TELEGRAM_BOT_TOKEN);
 
-    const checkString = Object.keys(data)
-        .filter((key) => key !== "hash")
-        .map((key) => `${key}=${data[key]}`)
-        .sort()
-        .join("\n");
+    // in the format key=<value> with a line feed character ('\n', 0x0A) used as separator
+    // e.g., 'auth_date=<auth_date>\nquery_id=<query_id>\nuser=<user>
+    const dataCheckString = Object.entries(telegramInitData)
 
-    const subtle = webcrypto.subtle;
+    // The hexadecimal representation of the HMAC-SHA-256 signature of the data-check-string with the secret key
+    const _hash = createHmac('sha256', secret.digest())
+        .update(dataCheckString.join('\n'))
+        .digest('hex');
 
-    const secretKey = await subtle.importKey(
-        "raw",
-        encoder.encode("WebAppData"),
-        { name: "HMAC", hash: "SHA-256" },
-        true,
-        ["sign"]
-    );
-    const secret = await subtle.sign("HMAC", secretKey, encoder.encode(botToken));
-    const signatureKey = await subtle.importKey(
-        "raw",
-        secret,
-        { name: "HMAC", hash: "SHA-256" },
-        true,
-        ["sign"]
-    );
-    const signature = await subtle.sign(
-        "HMAC",
-        signatureKey,
-        encoder.encode(checkString)
-    );
-
-    //const hex = [...new Uint8Array(signature)]
-    //    .map((b) => b.toString(16).padStart(2, "0"))
-    //    .join("");
-
-    const hex = Buffer.from(signature).toString('hex');
-
-    return data.hash.hash === hex;
-}
+    // if hash are equal the data may be used on your server.
+    // Complex data types are represented as JSON-serialized objects.
+    console.log(_hash, telegramInitData.hash);
+    return _hash === telegramInitData.hash;
+};
 
 export default async function handler(req: NextApiRequest, res: NextApiResponse<Data>) {
     if (req.method !== 'POST') {
@@ -75,7 +54,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     const data = transformInitData(req.body.hash);
-    const isOk = await validate(
+    const isOk = await verifyTelegramWebAppData(
         data,
         process.env.BOT_TOKEN!
     );
