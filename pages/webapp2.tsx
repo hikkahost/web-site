@@ -69,6 +69,11 @@ const useStyles = createStyles((theme, _params, getRef) => ({
         fontFamily: 'Roboto'
     },
 
+    modal: {
+        backgroundColor: '#1C1C1D',
+        color: 'white',
+    },
+
     button: {
         padding: '0',
 
@@ -196,6 +201,12 @@ const WebApp = () => {
             fetch(`/api/host?token=${token}`)
                 .then(res => res.json())
                 .then(json => {
+                    if (!json.data.stats) {
+                        setCpu(prev => [...prev.slice(1), 0]);
+                        setRam(prev => [...prev.slice(1), 0]);
+                        setPing(prev => [...prev.slice(1), 0]);
+                        return;
+                    }
                     setCpu(prev => [...prev.slice(1), (json.data.stats.cpu_stats.cpu_usage.total_usage / json.data.stats.cpu_stats.system_cpu_usage) * 100]);
                     setRam(prev => [...prev.slice(1), (json.data.stats.memory_stats.usage / 1024 / 1024 / 1024) * 100]);
                     setRamInfo(json.data.stats.memory_stats.usage / 1024 / 1024);
@@ -396,13 +407,13 @@ const WebApp = () => {
                                 </Center>
                             </Tabs>
 
-                            <Modal opened={opened_action} onClose={close_action} title="Action">
+                            <Modal opened={opened_action} onClose={close_action} title="Action" className={classes.modal}>
                                 Action successfully completed
                             </Modal>
 
-                            <Modal opened={opened_logs} onClose={close_logs} title="Logs">
-                                <ScrollArea h={500}>
-                                    <Code block>
+                            <Modal opened={opened_logs} onClose={close_logs} title="Logs" className={classes.modal}>
+                                <ScrollArea h={500} className={classes.modal}>
+                                    <Code block className={classes.modal}>
                                         {logs}
                                     </Code>
                                 </ScrollArea>
