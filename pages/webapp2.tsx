@@ -70,8 +70,10 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     },
 
     modal: {
-        backgroundColor: '#1C1C1D',
-        color: 'white',
+        '& + &': {
+            backgroundColor: '#1C1C1D',
+            color: 'white',
+        }
     },
 
     button: {
