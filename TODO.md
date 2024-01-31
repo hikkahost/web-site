@@ -1,0 +1,1 @@
+1. add dark theme for logs
