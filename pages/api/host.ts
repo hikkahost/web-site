@@ -16,7 +16,7 @@ export default async function handler(
 
     let start_time = new Date();
     const response = await fetch(
-        `http://158.160.8.70:5000/api/host/${userId}/stats`,
+        `http://158.160.84.24:5000/api/host/${userId}/stats`,
         {
             headers: {
                 "Content-Type": "application/json",

@@ -81,7 +81,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
 
     if (isOk) {
         const response = await (await fetch(
-            `http://api.hikkahost.tech:7777/api/user/${userId}/token`,
+            `http://158.160.84.24:5000/api/user/${userId}/token`,
             {
                 headers: {
                     "Content-Type": "application/json",

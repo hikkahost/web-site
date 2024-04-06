@@ -15,7 +15,7 @@ export default async function handler(
     let userId = token.toString().split(":")[0];
 
     const response = await fetch(
-        `http://158.160.8.70:5000/api/host/${userId}/?action=${action}`,
+        `http://158.160.84.24:5000/api/host/${userId}/?action=${action}`,
         {
             method: 'PUT',
             headers: {
