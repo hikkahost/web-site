@@ -1,5 +1,4 @@
 import { TelegramProvider, useTelegram } from "../components/provider";
-import { useSearchParams } from 'next/navigation';
 import {
     Container,
     Button,
@@ -16,11 +15,11 @@ import {
     ScrollArea,
     Code,
     LoadingOverlay,
-    Box
+    Box,
+    useMantineColorScheme
 } from '@mantine/core';
 import { useDisclosure, useHotkeys } from '@mantine/hooks';
 import {
-    IconPlanet,
     IconCaretRightFilled,
     IconPlayerPauseFilled,
     IconArticleFilledFilled
@@ -70,10 +69,8 @@ const useStyles = createStyles((theme, _params, getRef) => ({
     },
 
     modal: {
-        '& + &': {
-            backgroundColor: '#1C1C1D',
-            color: 'white',
-        }
+        backgroundColor: '#1C1C1D',
+        color: 'white',
     },
 
     button: {
@@ -121,6 +118,7 @@ const useStyles = createStyles((theme, _params, getRef) => ({
 
 const WebApp = () => {
     const { user, webApp, data } = useTelegram();
+    const { setColorScheme, clearColorScheme } = useMantineColorScheme();
     //const user = {
     //    id: 1218845111,
     //    username: 'test'
@@ -153,6 +151,7 @@ const WebApp = () => {
                 console.log(err);
             }
             );
+        setColorScheme('dark');
     }, [webApp]);
 
     //const user = 'test';
