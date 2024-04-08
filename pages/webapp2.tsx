@@ -240,8 +240,8 @@ const WebApp = () => {
                     <>
                         <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ color: "#000" }} />
                         <Container style={{ textAlign: 'center' }} size="xs" mb={10}>
-                            <img src="/moon.gif" alt="HikkaHost" style={{ width: 80, height: 80, marginTop: 10 }} />
-                            <Title order={1} mt={20}>
+                            <img src="/moon.gif" alt="HikkaHost" style={{ width: 100, height: 100, marginTop: 5 }} />
+                            <Title order={1} mt={5}>
                                 HikkaHost
                             </Title>
 
