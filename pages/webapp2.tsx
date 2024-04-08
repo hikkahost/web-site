@@ -239,10 +239,8 @@ const WebApp = () => {
                 {user ? (
                     <>
                         <LoadingOverlay visible={visible} zIndex={1000} overlayProps={{ color: "#000" }} />
-                        <Container style={{ textAlign: 'center' }} size="xs">
-                            <ThemeIcon size={80} radius={120} color="#007AFF" mt={10}>
-                                <img src="/moon.gif" alt="HikkaHost" style={{ width: 64, height: 64 }} />
-                            </ThemeIcon>
+                        <Container style={{ textAlign: 'center' }} size="xs" mb={10}>
+                            <img src="/moon.gif" alt="HikkaHost" style={{ width: 80, height: 80, marginTop: 10 }} />
                             <Title order={1} mt={20}>
                                 HikkaHost
                             </Title>
