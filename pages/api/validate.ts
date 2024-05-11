@@ -73,6 +73,11 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse<
     }
 
     const data = transformInitData(req.body.hash);
+
+    if (JSON.parse(data.user).id != req.body.userId) {
+        return res.status(403).json({ error: 'AHAHAH, NICE TRY' });
+    }
+
     const isOk = await validate(
         data,
         process.env.BOT_TOKEN!
