@@ -97,7 +97,7 @@ export function MainChart() {
               <button
                 key={chart}
                 data-active={activeChart === chart}
-                className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-l px-6 py-4 text-left first:border-l-0 data-[active=true]:bg-muted/50 sm:border-t-0 sm:px-8 sm:py-6"
+                className="relative z-30 flex flex-1 flex-col justify-center gap-1 border-l p-3 text-left first:border-l-0 data-[active=true]:bg-muted/50 sm:border-t-0 sm:px-8 sm:py-6"
                 onClick={() => setActiveChart(chart)}
               >
                 <span className="text-xs text-muted-foreground">
