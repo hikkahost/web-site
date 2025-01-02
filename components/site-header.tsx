@@ -8,9 +8,9 @@ import { ThemeToggle } from "@/components/theme-toggle"
 
 export function SiteHeader() {
   return (
-    <header className="bg-background sticky top-0 z-40 w-full border-b">
-      <div className="container flex h-16 items-center space-x-4 sm:justify-between sm:space-x-0">
-        <MainNav items={siteConfig.mainNav} />
+    <header className="border-grid sticky top-2 z-50 w-full bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <div className="container flex h-12 items-center space-x-4 px-3 sm:justify-between sm:space-x-0">
+        <MainNav />
         <div className="flex flex-1 items-center justify-end space-x-4">
           <nav className="flex items-center space-x-1">
             <Link
@@ -24,12 +24,12 @@ export function SiteHeader() {
                   variant: "ghost",
                 })}
               >
-                <Icons.gitHub className="h-5 w-5" />
+                <Icons.gitHub className="size-5" />
                 <span className="sr-only">GitHub</span>
               </div>
             </Link>
             <Link
-              href={siteConfig.links.twitter}
+              href={siteConfig.links.telegram}
               target="_blank"
               rel="noreferrer"
             >
@@ -39,8 +39,8 @@ export function SiteHeader() {
                   variant: "ghost",
                 })}
               >
-                <Icons.twitter className="h-5 w-5 fill-current" />
-                <span className="sr-only">Twitter</span>
+                <Icons.telegram className="size-5 fill-current" />
+                <span className="sr-only">Telegram</span>
               </div>
             </Link>
             <ThemeToggle />
