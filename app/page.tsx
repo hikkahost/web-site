@@ -14,7 +14,7 @@ export default function IndexPage() {
         </h1>
         <div className="flex items-center justify-center space-x-2">
           <Icons.zap className="size-5 md:size-8" />
-          <p className="text-center text-lg md:text-xl">3.000+ пользователей</p>
+          <p className="text-center text-lg md:text-xl">5.000+ пользователей</p>
         </div>
       </section>
       <section className="container grid items-center gap-3 px-3 pb-3 pt-4 md:grid-cols-2 md:py-5">
