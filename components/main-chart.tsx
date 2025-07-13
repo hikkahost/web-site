@@ -49,7 +49,7 @@ export function MainChart() {
       try {
         setLoading(true);
         setError(null);
-        const response = await fetch("https://api.hikka.host/api/statistic");
+        const response = await fetch("http://158.160.84.24:5000/api/statistic");
         if (!response.ok) {
           throw new Error(`Ошибка загрузки данных: ${response.statusText}`);
         }
